@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>桌面设置 - 弹窗动效</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: system-ui, "Microsoft YaHei", sans-serif;
+      letter-spacing: 0;
+      background: #090909;
+      color: #f4f4f4;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    button { font: inherit; color: inherit; cursor: pointer; }
+
+    .stage {
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      background: #090909;
+    }
+
+    .screen {
+      position: relative;
+      width: min(100%, 430px);
+      min-height: 100dvh;
+      overflow: hidden;
+      background: #090909;
+    }
+
+    .status {
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .status-right { font-size: 12px; color: #eeeeee; }
+
+    .back {
+      width: 52px;
+      height: 58px;
+      margin-left: 16px;
+      border: 0;
+      background: transparent;
+      font-size: 38px;
+      line-height: 1;
+      text-align: center;
+      font-weight: 200;
+    }
+
+    h1 {
+      margin: 14px 28px 20px;
+      font-size: 31px;
+      line-height: 1.25;
+      font-weight: 600;
+    }
+
+    .section-label {
+      margin: 24px 28px 9px;
+      color: #9da3b0;
+      font-size: 14px;
+    }
+
+    .group {
+      margin: 0 14px;
+      overflow: hidden;
+      border-radius: 22px;
+      background: #282828;
+    }
+
+    .setting {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      min-height: 54px;
+      padding: 0 15px;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      font-size: 16px;
+    }
+
+    .setting .name { flex: 1; white-space: nowrap; }
+    .setting .value { max-width: 60%; color: #989898; font-size: 14px; white-space: nowrap; }
+    .setting .indicator { width: 20px; margin-left: 7px; color: #989898; font-size: 20px; text-align: center; }
+    .setting:focus-visible, .option:focus-visible { outline: 2px solid #5a9bff; outline-offset: -3px; }
+    .setting.active { background: #383838; }
+    .setting-static { cursor: default; }
+
+    .switch {
+      width: 34px;
+      height: 20px;
+      margin-left: 10px;
+      border-radius: 12px;
+      background: #5b5b5b;
+      padding: 3px;
+    }
+    .switch::before { content: ""; display: block; width: 14px; height: 14px; border-radius: 50%; background: white; }
+    .switch.on { background: #4e89f7; }
+    .switch.on::before { transform: translateX(14px); }
+
+    .scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: transparent;
+      pointer-events: auto;
+    }
+
+    .popup {
+      position: absolute;
+      z-index: 3;
+      width: 196px;
+      padding: 5.5px 0;
+      border: 1px solid rgb(190 190 190 / 16%);
+      border-radius: 25px;
+      background: rgb(43 43 43 / 85%);
+      backdrop-filter: blur(20px) saturate(1.15);
+      -webkit-backdrop-filter: blur(20px) saturate(1.15);
+      box-shadow: 0 12px 28px rgb(0 0 0 / 26%), inset 0 1px rgb(255 255 255 / 3%);
+      transform-origin: 83% 23%;
+      transform: translate(14px, 12px) scale(0.12, 0.12);
+      opacity: 0;
+      filter: blur(6px);
+      will-change: transform, opacity, filter;
+      pointer-events: none;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 44px;
+      padding: 0 16px 0 20px;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      font-size: 17px;
+    }
+    .option:hover { background: #343434; }
+    .option.selected { color: #5b9bff; }
+    .check { font-size: 23px; line-height: 1; }
+
+    .group.second { margin-top: 0; }
+
+    @media (max-height: 780px) {
+      h1 { margin-top: 10px; margin-bottom: 14px; font-size: 27px; }
+      .section-label { margin-top: 16px; }
+      .setting { min-height: 49px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .popup { will-change: auto; }
+    }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <div class="screen" id="screen">
+      <div class="status"><span>13:59 ◉ ···</span><span class="status-right">▴ 5G ▂▅  Wi-Fi  82% ▰</span></div>
+      <button class="back" type="button" aria-label="返回" id="back">‹</button>
+      <h1>桌面</h1>
+      <div class="section-label">桌面设置</div>
+      <div class="group">
+        <div class="setting setting-static"><span class="name">桌面模式</span><span class="value">经典模式</span><span class="indicator">›</span></div>
+        <div class="setting setting-static"><span class="name">负一屏</span><span class="value">开</span><span class="indicator">›</span></div>
+        <div class="setting setting-static"><span class="name">桌面上滑</span><span class="value">无</span><span class="indicator">⌃</span></div>
+        <div class="setting setting-static"><span class="name">桌面下滑</span><span class="value">通知和控制中心</span><span class="indicator">⌃</span></div>
+        <div class="setting setting-static"><span class="name">桌面搜索</span><span class="value">关闭</span><span class="indicator">›</span></div>
+        <button class="setting" id="trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+          <span class="name">动画速率</span><span class="value" id="value">优雅</span><span class="indicator">⌃</span>
+        </button>
+        <div class="setting setting-static"><span class="name">双击桌面空白处锁屏</span><span class="switch"></span></div>
+      </div>
+      <div class="section-label">桌面布局</div>
+      <div class="group second">
+        <div class="setting setting-static"><span class="name">卸载应用后自动补位</span><span class="switch on"></span></div>
+        <div class="setting setting-static"><span class="name">锁定桌面布局</span><span class="switch"></span></div>
+        <div class="setting setting-static"><span class="name">无字模式</span><span class="value">全部无字</span><span class="indicator">⌃</span></div>
+        <div class="setting setting-static"><span class="name">桌面布局规则</span><span class="value">4×6</span><span class="indicator">›</span></div>
+      </div>
+      <div class="scrim" id="scrim" hidden></div>
+      <div class="popup" id="popup" role="listbox" aria-label="动画速率" aria-hidden="true">
+        <button class="option selected" type="button" role="option" aria-selected="true" data-value="优雅"><span>优雅</span><span class="check">✓</span></button>
+        <button class="option" type="button" role="option" aria-selected="false" data-value="均衡"><span>均衡</span><span class="check"></span></button>
+        <button class="option" type="button" role="option" aria-selected="false" data-value="快速"><span>快速</span><span class="check"></span></button>
+      </div>
+    </div>
+  </main>
+  <script>
+    const screen = document.getElementById('screen');
+    const trigger = document.getElementById('trigger');
+    const popup = document.getElementById('popup');
+    const scrim = document.getElementById('scrim');
+    const value = document.getElementById('value');
+    const options = [...popup.querySelectorAll('.option')];
+
+    const motion = {
+      progress: 0,
+      target: 0,
+      frame: 0,
+      start: 0,
+      from: 0,
+      duration: 0,
+    };
+
+    function placePopup() {
+      const row = trigger.getBoundingClientRect();
+      const host = screen.getBoundingClientRect();
+      const width = popup.offsetWidth;
+      const height = popup.offsetHeight;
+      const x = Math.min(row.right - host.left - 13, host.width - 12) - width;
+      const y = Math.min(row.top - host.top + 12, host.height - height - 12);
+      popup.style.left = `${Math.max(12, x)}px`;
+      popup.style.top = `${Math.max(12, y)}px`;
+    }
+
+    function paint(progress) {
+      const x = motion.target
+        ? 14 * Math.pow(1 - progress, 4) - 9 * Math.sin(Math.PI * progress)
+        : 22 * Math.pow(1 - progress, 1.65);
+      const y = motion.target
+        ? 12 * Math.pow(1 - progress, 1.8)
+        : -28 * Math.pow(1 - progress, 2.4) + 5 * Math.sin(Math.PI * progress);
+      const scaleX = 0.12 + 0.88 * progress;
+      const scaleY = scaleX - 0.02 * Math.sin(Math.PI * progress);
+      popup.style.transform = `translate(${x}px, ${y}px) scale(${scaleX}, ${scaleY})`;
+      popup.style.opacity = String(Math.min(1, progress * 2.2));
+      popup.style.filter = `blur(${(6 * Math.pow(1 - progress, 3)).toFixed(2)}px)`;
+      popup.style.pointerEvents = progress > 0.94 && motion.target === 1 ? 'auto' : 'none';
+    }
+
+    function finishClosed() {
+      popup.setAttribute('aria-hidden', 'true');
+      scrim.hidden = true;
+      trigger.classList.remove('active');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    function animateTo(target) {
+      cancelAnimationFrame(motion.frame);
+      motion.from = motion.progress;
+      motion.target = target;
+      motion.start = performance.now();
+      motion.duration = target ? 245 * (1 - motion.from) : 115 * motion.from;
+
+      if (target) {
+        placePopup();
+        scrim.hidden = false;
+        popup.setAttribute('aria-hidden', 'false');
+        trigger.classList.add('active');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+
+      function tick(now) {
+        const t = Math.min(1, (now - motion.start) / Math.max(1, motion.duration));
+        const eased = target ? 1 - Math.pow(1 - t, 3.2) : Math.pow(t, 2.5);
+        motion.progress = motion.from + (target - motion.from) * eased;
+        paint(motion.progress);
+        if (t < 1) motion.frame = requestAnimationFrame(tick);
+        else if (!target) finishClosed();
+      }
+      motion.frame = requestAnimationFrame(tick);
+    }
+
+    trigger.addEventListener('click', () => animateTo(motion.target ? 0 : 1));
+    scrim.addEventListener('click', () => animateTo(0));
+    document.getElementById('back').addEventListener('click', () => {
+      if (motion.target) animateTo(0);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && motion.target) {
+        animateTo(0);
+        trigger.focus();
+      }
+    });
+    popup.addEventListener('click', (event) => {
+      const option = event.target.closest('.option');
+      if (!option || motion.target !== 1) return;
+      value.textContent = option.dataset.value;
+      for (const item of options) {
+        const selected = item === option;
+        item.classList.toggle('selected', selected);
+        item.setAttribute('aria-selected', String(selected));
+        item.querySelector('.check').textContent = selected ? '✓' : '';
+      }
+      animateTo(0);
+    });
+    window.addEventListener('resize', () => { if (motion.target) placePopup(); });
+    paint(0);
+  </script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>液体玻璃 · 曲线实验</title>
+<style>
+:root{font-family:Inter,"Segoe UI","Microsoft YaHei",sans-serif;color:#202c2a;background:#f3f4ee;font-synthesis:none;--ink:#202c2a;--muted:#74817a;--line:#dce1d8;--green:#216b55;--orange:#dc8051}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #8fbca4;outline-offset:3px}button{color:inherit}header{max-width:1256px;margin:auto;padding:26px 36px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:10px;font-weight:650;font-size:14px}.mark{width:26px;height:26px;border-radius:9px;border:1px solid #5f8874;background:linear-gradient(130deg,#dbe8d6,#9bbba6);box-shadow:inset 2px 2px 3px #fff8}.badge{font:11px ui-monospace,monospace;letter-spacing:1.4px;color:var(--muted)}main{max-width:1256px;margin:auto;padding:38px 36px 28px}.heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:30px}.eyebrow{font:11px ui-monospace,monospace;letter-spacing:2px;color:var(--green);margin-bottom:12px}h1{font-size:32px;letter-spacing:-1px;font-weight:600;margin:0 0 10px}p{margin:0;line-height:1.7}.intro{font-size:13px;color:var(--muted)}.heading-note{font:12px ui-monospace,monospace;color:var(--muted);white-space:nowrap;padding-bottom:3px}.layout{display:grid;grid-template-columns:minmax(370px,1fr) minmax(400px,1.08fr);gap:24px}.preview{position:relative;min-height:748px;border:1px solid #d9dfd3;border-radius:24px;background:radial-gradient(ellipse at 30% 34%,#e1e9d8,transparent 62%),#e8ece2;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:20px 14px}.preview-head{width:100%;display:flex;justify-content:space-between;padding:0 8px;font-size:11px;letter-spacing:1px;color:#7c8876}.preview-head b{font-weight:500;color:#4e6958}.phone{position:relative;flex-shrink:0;width:340px;height:650px;margin:20px 0 13px;background:#080a0b;color:#f2f4f4;border:6px solid #252c29;border-radius:42px;box-shadow:0 28px 35px -24px #34402b80,0 0 0 1px #777c70,inset 0 0 0 1px #424842;overflow:hidden;font-family:"Segoe UI","Microsoft YaHei",sans-serif}.status{display:flex;justify-content:space-between;align-items:center;height:46px;padding:0 22px;font-size:12px;font-weight:600}.island{position:absolute;left:50%;transform:translateX(-50%);width:80px;height:19px;top:9px;border-radius:15px;background:#000}.phone-title{font-weight:500;font-size:26px;text-align:center;margin:12px 0 27px;letter-spacing:2px}.section-title{font-size:11px;color:#a6aaad;margin:0 21px 10px}.settings-group{background:#222627;border:1px solid #2b3030;margin:0 13px 21px;border-radius:22px;overflow:hidden}.setting{display:flex;align-items:center;justify-content:space-between;width:100%;padding:17px 17px;background:none;border:0;text-align:left;color:inherit;font-size:14px;min-height:59px}.setting+.setting{border-top:1px solid #ffffff06}.setting small{display:block;color:#949e9e;font-size:10px;line-height:1.7;padding-top:4px}.value{font-size:12px;color:#a8b0b1;display:flex;gap:8px;align-items:center}.switch{height:24px;width:41px;background:#3486f7;border-radius:20px;flex-shrink:0;position:relative}.switch:after{content:"";position:absolute;width:18px;height:18px;top:3px;right:3px;background:#fff;border-radius:50%}.setting-icon{font-size:19px;color:#438eff;width:26px;display:inline-block;margin-right:5px}.setting-copy{display:flex;align-items:center}.text-group{display:block}.bottom-nav{position:absolute;bottom:22px;left:31px;right:31px;height:58px;border-radius:32px;border:1px solid #ffffff2a;background:#d5e3db0b;display:flex;align-items:center;justify-content:space-around;backdrop-filter:blur(15px);font-size:10px;color:#a9b1ae}.bottom-nav span{text-align:center;width:70px;padding:7px;border-radius:24px}.bottom-nav b{display:block;font-size:18px;font-weight:500;margin-bottom:3px}.bottom-nav .active{background:#ffffff0c;color:#529dff}.home-bar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:100px;height:3px;border-radius:3px;background:#d5dcd5}.hint{font-size:11px;color:#74816c;text-align:center}.popup{position:absolute;z-index:4;will-change:left,top,width,height,opacity,filter;isolation:auto;border-radius:24px;box-shadow:0 9px 23px #0005;pointer-events:none}.glass{position:absolute;inset:0;border-radius:inherit;overflow:hidden;background:linear-gradient(135deg,#ffffff06,#080a0d08),rgba(18,18,18,.4);backdrop-filter:blur(12px) saturate(150%);-webkit-backdrop-filter:blur(12px) saturate(150%);border:1px solid transparent;background-clip:padding-box}.glass:after{content:"";position:absolute;inset:0;border-radius:inherit;border:1px solid #ffffff26;box-shadow:inset 1px 1px 1px #fff2,inset -1px -1px 1px #ffffff0c;pointer-events:none}.menu-content{width:190px;padding:6px 0}.menu-item{position:relative;display:flex;align-items:center;justify-content:space-between;width:190px;height:52px;padding:0 20px;border:0;background:transparent;color:#f0f2f4;font-size:14px;text-align:left}.menu-item:hover{background:#fff1}.menu-item.selected{color:#529aff}.check{font-size:20px}.bounds{position:absolute;z-index:6;border:1px dashed #a7e7bf;border-radius:24px;pointer-events:none;display:none}.anchor-dot{position:absolute;z-index:7;width:5px;height:5px;background:#a7e7bf;border-radius:50%;display:none}.panel{display:flex;flex-direction:column;gap:18px}.card{border:1px solid var(--line);border-radius:20px;background:#fffefa;padding:24px}.card-title{font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.card-title .number{font:10px ui-monospace,monospace;color:#9aa698;letter-spacing:1px}.tabs{display:flex;background:#eff2eb;padding:4px;border-radius:11px;gap:4px}.tabs button{flex:1;border:0;background:none;border-radius:8px;padding:10px 12px;font-size:12px;color:#899185}.tabs button[aria-pressed=true]{background:#fffefa;box-shadow:0 1px 4px #263b2410;color:var(--ink);font-weight:600}.play-row{display:flex;gap:10px;margin-top:20px}.primary,.secondary{border-radius:10px;padding:11px 16px;font-size:12px;border:1px solid #dce3d7;background:transparent}.primary{background:var(--green);border-color:var(--green);color:#fff;flex:1}.secondary{min-width:80px}.primary:hover{background:#19563f}.secondary:hover{background:#f1f4eb}.timeline-meta{display:flex;align-items:center;justify-content:space-between;font:11px ui-monospace,monospace;margin-top:24px;color:var(--muted)}.timeline-meta output{color:var(--green);font-weight:600}input[type=range]{width:100%;margin:14px 0 18px;accent-color:var(--green);cursor:ew-resize;height:5px}input[type=checkbox]{accent-color:var(--green);width:14px;height:14px;margin:0}.options{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;color:#657261}.options label{display:flex;align-items:center;gap:6px}.speed{border:1px solid #dce3d7;background:#f8faf4;border-radius:7px;padding:6px;font-size:11px;color:var(--ink)}.graph-title{margin-bottom:14px}.legend{display:flex;gap:15px;font-size:10px;font-weight:400;color:var(--muted)}.legend span:before{content:"";display:inline-block;vertical-align:middle;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:5px}.legend span:last-child:before{background:var(--orange)}.edge-tabs{display:flex;gap:5px}.edge-tabs button{padding:6px 12px;font-size:11px;border:1px solid transparent;border-radius:7px;background:none;color:var(--muted)}.edge-tabs button[aria-pressed=true]{background:#e9f1e7;color:var(--green);border-color:#d6e2d0}.graph{display:block;width:100%;height:auto;touch-action:none;cursor:crosshair;margin:8px 0 0}.graph text{font-family:ui-monospace,monospace;fill:#909b8c;font-size:10px}.graph-foot{display:flex;justify-content:space-between;font-size:10px;color:#8a9585}.readouts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;border-top:1px solid #e9ede3;margin-top:16px;padding-top:16px}.readouts span{font-size:10px;color:#8b9685}.readouts b{display:block;margin-top:5px;font:14px ui-monospace,monospace;color:#3b4c3b}.formula-card{background:transparent;border:1px solid var(--line);border-radius:16px;padding:18px 22px}.formula-top{display:flex;justify-content:space-between;font-size:11px;color:#6f7c69}.formula-top b{font-weight:500;color:#476342}.formula{display:block;font:11px/1.9 ui-monospace,monospace;white-space:normal;margin-top:12px;color:#77836f;overflow-wrap:anywhere}.formula-card details{font-size:11px;color:#7a8771;margin-top:10px;line-height:1.8}.formula-card summary{cursor:pointer}footer{display:flex;justify-content:space-between;gap:16px;font-size:10px;color:#8f9a86;margin-top:23px;line-height:1.6}.toast{position:absolute;z-index:8;bottom:94px;left:50%;transform:translateX(-50%);border-radius:10px;background:#313b35ed;border:1px solid #ffffff20;color:#d5e6d8;padding:9px 16px;font-size:11px;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none}.phone.light{background:#e9ecec;color:#222}.phone.light .settings-group{background:#fff9;border-color:#d1d5d4}.phone.light .section-title,.phone.light small{color:#7b8586}.phone.light .glass{background:#fafafa99;backdrop-filter:blur(14px) saturate(150%)}.phone.light .menu-item{color:#303735}.phone.light .menu-item.selected{color:#2877e2}.phone.light .bottom-nav{color:#6b7675;background:#fff5;border-color:#0001}.phone.light .bottom-nav .active{color:#2877e2}.phone.light .island{background:#dadfdd}.phone.light .home-bar{background:#6a756e}
+@media(min-width:1300px){main{padding-top:46px}.layout{gap:30px}}@media(max-width:900px){header,main{padding-left:22px;padding-right:22px}.layout{grid-template-columns:minmax(350px,1fr) minmax(320px,1fr);gap:16px}.card{padding:18px}.heading-note{display:none}.options{flex-wrap:wrap}}@media(max-width:740px){main{padding-top:26px}.layout{grid-template-columns:1fr}.preview{min-height:0}.panel{gap:14px}.heading{margin-bottom:22px}h1{font-size:27px}.badge{font-size:9px}.preview-head{padding:0 6px}footer{flex-direction:column;gap:5px}.phone{margin-top:16px}.options{flex-wrap:nowrap}.heading .intro{font-size:12px}}@media(max-width:390px){header,main{padding-left:12px;padding-right:12px}.phone{width:320px}.preview{padding-left:0;padding-right:0}.preview-head{padding:0 16px}.card{padding:16px}}
+
+/* Height-adaptive motion experiment. Keep the list layout independent of the shell. */
+.scenario{padding-bottom:17px;margin-bottom:18px;border-bottom:1px solid var(--line)}
+.scenario-label{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);margin-bottom:10px}
+.scenario-label select{max-width:180px}.scenario .tabs button{padding:8px 5px}
+.motion-note{font-size:11px;line-height:1.7;color:#6b8069;margin-top:10px;min-height:36px}
+.menu-content{height:100%;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#ffffff3b transparent;touch-action:pan-y}
+.menu-item{flex-shrink:0}.phone.light .menu-content{scrollbar-color:#0003 transparent}
+.popup{will-change:left,top,width,height;background:rgba(18,22,23,.58);backdrop-filter:blur(12px) saturate(150%);-webkit-backdrop-filter:blur(12px) saturate(150%)}
+.glass{background:linear-gradient(135deg,#ffffff06,#080a0d08);backdrop-filter:none;-webkit-backdrop-filter:none}
+.phone.light .popup{background:#fafafab3;backdrop-filter:blur(14px) saturate(150%)}
+.phone.light .glass{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+.menu-content{width:100%;overflow-x:hidden}.menu-item{width:100%;min-width:174px;white-space:nowrap}
+.scroll-hint{position:absolute;z-index:5;bottom:2px;left:0;right:0;height:22px;background:linear-gradient(transparent,#151b1ddb);color:#c3cfcb;text-align:center;font-size:9px;line-height:24px;border-radius:0 0 24px 24px;pointer-events:none}
+.phone.light .scroll-hint{background:linear-gradient(transparent,#ecf0efed);color:#657368}
+.menu-content.scrollable{padding-bottom:23px}.preview{position:sticky;top:18px;align-self:start}.legend span:last-child:before{border-radius:1px;height:2px;width:12px}
+@media(max-width:740px){.preview{position:relative;top:0}}
+
+.editor{border-top:1px solid var(--line);margin-top:16px;padding-top:14px}.editor-head{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:#60765d;margin-bottom:10px}.editor-fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.editor-fields label{font-size:10px;color:#83917b;display:flex;flex-direction:column;gap:5px}.editor input,.editor select{width:100%;min-width:0;border:1px solid #d7e1d0;border-radius:7px;padding:7px;background:#fafcf5;color:#354b32;font-size:11px}.editor input:disabled{opacity:.45}.editor-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}.editor-actions button{font-size:10px;padding:7px 9px;border:1px solid #d6dfce;background:#f5f8f0;border-radius:7px}.editor-actions button:disabled{opacity:.35;cursor:default}.editor-help{font-size:10px;line-height:1.7;color:#86937e;margin-top:10px}.graph [data-node]{cursor:grab;touch-action:none}.graph [data-node]:focus{outline:none;stroke:#dc8051;stroke-width:3}.edit-status{font-size:10px;min-height:16px;color:#71826a;margin-top:5px}.graph{min-height:180px}
+</style>
+</head>
+<body>
+<header><div class="brand"><span class="mark" aria-hidden="true"></span>CEDAR <span style="color:#8d9887;font-weight:400">/ Motion lab</span></div><span class="badge">EXPERIMENT 01</span></header>
+<main>
+<section class="heading"><div><div class="eyebrow">LIQUID GLASS · ANALYTIC MOTION</div><h1>液体玻璃，逐帧可见。</h1><p class="intro">让短菜单有弹性，让长菜单更稳定。切换列表长度，对比两种运动方式。</p></div><div class="heading-note">HEIGHT-ADAPTIVE MOTION</div></section>
+<div class="layout">
+<section class="preview" aria-label="弹窗演示"><div class="preview-head"><span>LIVE PREVIEW</span><b id="stateText">已展开</b></div>
+<div class="phone" id="phone"><div class="status"><span>09:41</span><span>▴ ▰ ▮</span></div><div class="island"></div><h2 class="phone-title">设置</h2><div class="section-title">外观</div>
+<div class="settings-group"><button class="setting" id="themeTrigger" aria-expanded="true" aria-controls="popup"><span id="triggerLabel">主题</span><span class="value"><span id="themeValue">跟随系统</span>⌄</span></button><div class="setting"><div>触感反馈<small>选择与确认操作使用系统触感</small></div><span class="switch" aria-hidden="true"></span></div></div>
+<div class="section-title">开发者</div><div class="settings-group"><div class="setting"><div class="setting-copy"><span class="setting-icon">⚙</span><span class="text-group">调试<small>全局动画速度 ×1.00</small></span></div></div></div>
+<div class="section-title">文件与 Root</div><div class="settings-group"><div class="setting"><div class="setting-copy"><span class="setting-icon">♧</span><span class="text-group">Root 权限<small>未授权</small></span></div></div><div class="setting"><div>Root 文件访问<small>使用 Root 读取系统目录</small></div><span class="switch" style="background:#555e5b" aria-hidden="true"></span></div></div>
+<div class="bottom-nav" aria-hidden="true"><span><b>⌂</b>主页</span><span><b>▱</b>文件</span><span class="active"><b>⚙</b>设置</span></div><div class="home-bar"></div>
+<div id="popup" class="popup" role="group" aria-label="主题选择"><div class="glass"><div class="menu-content" id="menuContent"><button class="menu-item selected" data-theme="system" aria-pressed="true"><span>跟随系统</span><span class="check">✓</span></button><button class="menu-item" data-theme="light" aria-pressed="false"><span>浅色</span><span class="check"></span></button><button class="menu-item" data-theme="dark" aria-pressed="false"><span>深色</span><span class="check"></span></button></div><div class="scroll-hint" id="scrollHint" hidden>向下滚动查看更多 ↓</div></div></div><div class="bounds" id="bounds"></div><div class="anchor-dot" id="anchorDot"></div><div class="toast" id="toast" role="status"></div>
+</div><p class="hint">点击菜单按钮打开 · 长列表可滚动 · 拖动时间轴慢慢观察</p></section>
+<aside class="panel">
+<section class="card"><div class="card-title">播放控制 <span class="number">01 / PLAYBACK</span></div><div class="scenario"><div class="scenario-label"><span>列表长度</span><span id="listSize">20 项 / 380px</span></div><div class="tabs" aria-label="列表长度"><button data-count="3" aria-pressed="false">短 · 3 项</button><button data-count="6" aria-pressed="false">中 · 6 项</button><button data-count="20" aria-pressed="true">长 · 20 项</button></div><div class="scenario-label" style="margin-top:14px"><label for="motionStyle">运动方案</label><select id="motionStyle" class="speed"><option value="adaptive">改进版 · 高度自适应</option><option value="original">原方案 · 等比例形变</option></select></div><p class="motion-note" id="motionNote"></p></div><div class="tabs" aria-label="动画方向"><button id="openMode" aria-pressed="true">展开 <span style="opacity:.5">360ms</span></button><button id="closeMode" aria-pressed="false">收起 <span style="opacity:.5">212ms</span></button></div><div class="play-row"><button class="primary" id="playButton">▶ 播放展开</button><button class="secondary" id="resetButton">↺ 重播</button></div><div class="timeline-meta"><span>时间轴 · 拖动暂停</span><output id="timeText" for="timeline">360 / 360 ms</output></div><input type="range" id="timeline" min="0" max="1000" value="1000" aria-label="动画进度"><div class="options"><label>速度 <select class="speed" id="speed" aria-label="播放速度"><option value="0.1">0.1×</option><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><label><input type="checkbox" id="loop">循环往返</label><label><input type="checkbox" id="showBounds">运动边界</label></div></section>
+<section class="card"><div class="card-title graph-title">轨迹对照 <div class="legend"><span>当前方案</span><span>原方案</span></div></div><div class="edge-tabs" aria-label="选择边缘"><button data-edge="left" aria-pressed="false">左边</button><button data-edge="top" aria-pressed="true">上边</button><button data-edge="right" aria-pressed="false">右边</button><button data-edge="bottom" aria-pressed="false">下边</button></div><svg id="graph" class="graph" viewBox="0 0 500 190" role="group" aria-label="可拖动节点的运动曲线"></svg><div class="graph-foot"><span>拖节点调整 · 双击空白加点</span><span id="maxError">最大误差 1.90px</span></div><div class="editor"><div class="editor-head"><strong>节点编辑</strong><span id="saveState">自动保存到本机</span></div><div class="editor-fields"><label>选中节点<select id="nodeSelect" aria-label="选中节点"></select></label><label>时间 / ms<input id="nodeTime" type="number" step="1" aria-label="节点时间"></label><label>位置 / px<input id="nodeValue" type="number" step="0.5" aria-label="节点位置"></label></div><div class="editor-actions"><button id="addNode">＋ 加节点</button><button id="deleteNode">删除节点</button><button id="undoNode">撤销</button><button id="resetNodes">重置此曲线</button><button id="exportNodes">导出 JSON</button></div><p class="editor-help">拖动绿色节点改变时间和位置，也可输入数值。两端锁定；改完点「重播」。展开 / 收起、四条边、列表长度和运动方案分别保存。</p><div id="editStatus" class="edit-status" role="status"></div></div><div class="readouts"><div><span>LEFT</span><b id="leftValue">0.000</b></div><div><span>TOP</span><b id="topValue">0.000</b></div><div><span>RIGHT</span><b id="rightValue">1.000</b></div><div><span>BOTTOM</span><b id="bottomValue">1.000</b></div></div></section>
+<section class="formula-card"><div class="formula-top"><span>函数曲线 + 节点微调</span><b>f′(1) = 0</b></div><code class="formula">edited(t) = base(t) + smoothOffset(nodes, t)</code><details><summary>长列表怎么改进</summary><p>短列表保留原拟合曲线。高度从 168px 增长到 360px 时，平滑过渡到长列表方案：展开高度差收敛到 96px，横向形变减弱，纵向下沉和模糊减弱，内容不缩放。长列表限制在可用高度内，剩余项目内部滚动。时间轴显示的是当前方案的真实几何位置，橙色虚线是同高度的原方案。</p></details></section>
+</aside></div>
+<footer><span>长列表改进方案仅在此 HTML 演示 · 无外部依赖 · Android 尚未同步</span><span>网页以背景模糊与高光近似玻璃材质，未复刻 Android 透镜折射。</span></footer>
+</main>
+<script id="fit-data" type="application/json">{"open":{"duration_ms":360,"degree":7,"start":[0.3103448275862069,0.0,1.0,0.18526315789473685],"end":[0.0,0.0,1.0,1.0],"coefficients":{"left":[-0.21810788491960167,-4.932466197277176,16.491070111853084,-20.375559903902356,8.78667151230458],"top":[1.0301600580093146,5.195618094900571,-33.17363941434734,51.92124951175894,-26.30809503146486],"right":[-0.301028672480381,-1.7015277473785442,9.83088273225206,-13.757696368278154,5.751588808441555],"bottom":[0.29544300344765306,12.821597445916654,-41.938416772601144,55.965857145268565,-28.321712259630118]},"rmse_px":{"left":0.4165335760625274,"top":0.5636804080368276,"right":0.5179598802355847,"bottom":1.0806914265665923},"max_error_px":{"left":1.075265647714622,"top":1.9037108378554082,"right":1.3407848596180327,"bottom":2.638623531970316},"overall_rmse_px":0.694156361956764},"close":{"duration_ms":212,"degree":7,"start":[0.0,0.0,1.0,1.0],"end":[0.3103448275862069,0.0,1.0,0.18526315789473685],"coefficients":{"left":[0.17835385629376904,-0.5091629723075073,4.05870690248671,-7.096544234088667,3.3381218512387787],"top":[1.2862418625879106,-1.2362791999400449,0.829807141387769,-1.5522017738574148,1.4668155306122914],"right":[-0.37694152504336176,0.41036051510415894,-1.453917502768346,2.92682803920571,-1.9582139129885507],"bottom":[-0.914558521471626,2.4446875408054245,-10.578745405073256,17.115526320496116,-8.344563054237607]},"rmse_px":{"left":1.0918972669338436,"top":0.6781128588927877,"right":0.40964822363678305,"bottom":2.0743201725052653},"max_error_px":{"left":2.4349929782714703,"top":1.551613884662461,"right":1.0764229080362508,"bottom":4.619731434715951},"overall_rmse_px":1.2372037560689422}}</script>
+<script id="keyframe-data" type="application/json">{"open":[[0,751,1665,1191,1753],[62,638,1731,1163,1959],[70,626,1733,1163,1984],[78,614,1733,1162,2006],[87,605,1730,1164,2025],[96,596,1727,1165,2043],[104,588,1722,1166,2058],[112,582,1718,1169,2073],[121,576,1712,1170,2084],[130,572,1706,1173,2094],[137,569,1701,1176,2103],[145,566,1695,1179,2110],[153,563,1689,1181,2115],[162,561,1684,1183,2120],[170,560,1680,1185,2125],[184,558,1676,1186,2128],[194,556,1670,1189,2134],[204,555,1668,1190,2136],[211,554,1666,1190,2138],[220,553,1665,1191,2140],[260,552,1662,1190,2137],[275,552,1661,1190,2136],[305,552,1662,1190,2137],[360,553,1665,1191,2140]],"close":[[0,553,1665,1191,2140],[16,588,1702,1176,2060],[23,604,1713,1172,2027],[33,620,1722,1168,1995],[47,650,1732,1162,1937],[58,664,1733,1161,1911],[71,688,1730,1161,1868],[80,698,1726,1162,1850],[90,707,1722,1164,1835],[104,721,1711,1167,1809],[113,727,1706,1170,1799],[121,731,1702,1172,1791],[130,735,1695,1175,1783],[138,737,1690,1177,1778],[147,740,1685,1180,1773],[155,742,1681,1182,1769],[163,744,1677,1184,1765],[173,746,1674,1186,1762],[180,747,1671,1187,1759],[188,748,1669,1188,1757],[197,751,1665,1191,1753],[212,751,1665,1191,1753]]}</script>
+<script>
+'use strict';
+const FIT=JSON.parse(document.getElementById('fit-data').textContent);
+const KEYS=JSON.parse(document.getElementById('keyframe-data').textContent);
+const $=id=>document.getElementById(id), EDGES=['left','top','right','bottom'];
+const ANCHOR=FIT.open.start, SETTLED=FIT.open.end;
+const W=190,BASE_H=168,BASE_Y=157;
+let H=380,itemCount=20,motionStyle="adaptive",alphaFrom=null,blurFrom=null;
+const STORAGE_KEY='cedar-popup-curve-nodes-v1';
+let edits={},histories={},selectedNode=1,graphMap=null,nodeDrag=null,graphDomain=null,editorMessage='';
+try{const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');if(saved&&typeof saved==='object'&&!Array.isArray(saved))edits=saved;}catch{}
+function configKey(direction=mode,which=edge){return [motionStyle,itemCount,direction,which].join('|');}
+function validNodes(nodes){return Array.isArray(nodes)&&nodes.length>=2&&nodes.length<=24&&nodes.every((n,i)=>Number.isFinite(n.t)&&Number.isFinite(n.d)&&Math.abs(n.d)<2&&n.t>=0&&n.t<=1&&(!i||n.t-nodes[i-1].t>=.005))&&nodes[0].t===0&&nodes[0].d===0&&nodes.at(-1).t===1&&nodes.at(-1).d===0;}
+for(const key of Object.keys(edits)){if(!/^(adaptive|original)\|(3|6|20)\|(open|close)\|(left|top|right|bottom)$/.test(key)||!validNodes(edits[key]))delete edits[key];}
+function nodesFor(key=configKey()){return edits[key]||[0,.2,.4,.6,.8,1].map(t=>({t,d:0}));}
+function copyNodes(nodes){return nodes.map(n=>({...n}));}
+function rememberEdit(){const key=configKey();(histories[key]??=[]).push(copyNodes(nodesFor(key)));if(histories[key].length>30)histories[key].shift();}
+function saveEdits(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(edits));$('saveState').textContent='已保存到本机';}catch{$('saveState').textContent='本机保存不可用，请导出';}}
+// Shape-preserving cubic Hermite offsets, with zero endpoint velocity.
+function nodeOffset(nodes,t){
+ if(!nodes||t<=0||t>=1)return 0;
+ const n=nodes.length,slopes=Array(n).fill(0);
+ for(let i=1;i<n-1;i++){const h0=nodes[i].t-nodes[i-1].t,h1=nodes[i+1].t-nodes[i].t,d0=(nodes[i].d-nodes[i-1].d)/h0,d1=(nodes[i+1].d-nodes[i].d)/h1;if(d0*d1>0){const w1=2*h1+h0,w2=h1+2*h0;slopes[i]=(w1+w2)/(w1/d0+w2/d1);}}
+ let i=0;while(i<n-2&&nodes[i+1].t<t)i++;
+ const span=nodes[i+1].t-nodes[i].t,u=(t-nodes[i].t)/span,u2=u*u,u3=u2*u;
+ return (2*u3-3*u2+1)*nodes[i].d+(u3-2*u2+u)*span*slopes[i]+(-2*u3+3*u2)*nodes[i+1].d+(u3-u2)*span*slopes[i+1];
+}
+let mode='open',edge='top',progress=1,playing=false,frameId=0,lastTick=0,holdUntil=0,from=null,current=[...SETTLED],toastId;
+const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reducedMotion)$('speed').value='0.25';
+function curve(t,s,e,a){if(t<=0)return s;if(t>=1)return e;return e+(1-t)**2*(s-e+t*(a[0]+t*(a[1]+t*(a[2]+t*(a[3]+t*a[4])))));}
+function rawSample(direction,t){const f=FIT[direction];return EDGES.map((key,i)=>curve(t,f.start[i],f.end[i],f.coefficients[key]));}
+const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
+function adaptation(){return smooth((H-BASE_H)/192);}
+function adaptiveSample(direction,t){
+ const raw=rawSample(direction,t),amount=adaptation();
+ if(amount===0)return raw;
+ // Decouple height expansion from vertical drift; keep the original time profile.
+ const expand=(raw[3]-raw[1]-ANCHOR[3])/(1-ANCHOR[3]);
+ const oldTravel=H*(1-ANCHOR[3]),travel=oldTravel*(1-amount)+96*amount;
+ const height=H-travel+travel*expand;
+ const top=raw[1]*BASE_H*(1-.65*amount)+8*amount*(1-expand);
+ const horizontal=1-.72*amount;
+ return [raw[0]*horizontal,top/H,1+(raw[2]-1)*horizontal,(top+height)/H];
+}
+function uneditedSample(direction,t){return motionStyle==='adaptive'?adaptiveSample(direction,t):rawSample(direction,t);}
+function baseSample(direction,t){return uneditedSample(direction,t).map((v,i)=>v+nodeOffset(edits[configKey(direction,EDGES[i])],t));}
+function sample(direction,t,initial=null){const base=baseSample(direction,t),start=baseSample(direction,0);return base.map((v,i)=>v+(initial?initial[i]-start[i]:0)*(1-t)**2);}
+function baseAlpha(t){const duration=FIT[mode].duration_ms,old=mode==='open'?Math.min(t*duration/75,1):(1-t)**2,a=motionStyle==='adaptive'?adaptation():0;const soft=mode==='open'?smooth(t*duration/140):1-smooth(t);return old*(1-a)+soft*a;}
+function baseBlur(t){const ms=t*FIT[mode].duration_ms,a=motionStyle==='adaptive'?adaptation():0;return W/638*1.5*(mode==='open'?42*Math.max(1-ms/220,0)**1.4:36*Math.min(ms/185,1)**1.3)*(1-.7*a);}
+
+function alpha(){return Math.max(0,Math.min(1,baseAlpha(progress)+(alphaFrom===null?0:alphaFrom-baseAlpha(0))*(1-progress)**2));}
+function motionBlur(){return Math.max(0,baseBlur(progress)+(blurFrom===null?0:blurFrom-baseBlur(0))*(1-progress)**2);}
+function drawGraph(){
+ const i=EDGES.indexOf(edge),scale=i%2===0?W:H;
+ const values=Array.from({length:241},(_,j)=>sample(mode,j/240,from)[i]*scale),original=Array.from({length:241},(_,j)=>rawSample(mode,j/240)[i]*scale);
+ const knots=nodesFor(),nodeValues=knots.map(n=>(uneditedSample(mode,n.t)[i]+n.d)*scale);
+ const low=Math.min(...values,...original,...nodeValues),high=Math.max(...values,...original,...nodeValues),pad=Math.max((high-low)*.25,12);
+ const min=graphDomain?graphDomain.min:low-pad,max=graphDomain?graphDomain.max:high+pad;
+ graphMap={min,max,scale};
+ const x=t=>40+448*t,y=v=>156-(v-min)/(max-min)*132;
+ let markup='';
+ for(let j=0;j<=4;j++){const t=j/4;markup+=`<line x1="${x(t)}" x2="${x(t)}" y1="16" y2="156" stroke="#eaf0e3"/><text x="${x(t)}" y="178" text-anchor="middle">${Math.round(t*FIT[mode].duration_ms)}</text>`;}
+ for(let j=0;j<3;j++){const v=low+(high-low)*j/2;markup+=`<line x1="40" x2="488" y1="${y(v)}" y2="${y(v)}" stroke="#eaf0e3"/><text x="31" y="${y(v)+3}" text-anchor="end">${v.toFixed(0)}</text>`;}
+ const path=points=>points.map((v,j)=>(j?'L':'M')+x(j/240).toFixed(2)+','+y(v).toFixed(2)).join(' ');
+ markup+=`<path d="${path(original)}" fill="none" stroke="#dc8051" stroke-width="1.5" stroke-dasharray="4 4"/><path d="${path(values)}" fill="none" stroke="#216b55" stroke-width="2.3"/>`;
+ const v=sample(mode,progress,from)[i]*scale;
+ markup+=`<line x1="${x(progress)}" x2="${x(progress)}" y1="16" y2="156" stroke="#216b55" stroke-opacity=".35" stroke-dasharray="3 4"/><circle cx="${x(progress)}" cy="${y(v)}" r="5" fill="#fffefa" stroke="#216b55" stroke-width="2"/>`;
+ markup+=knots.map((n,j)=>`<g data-node="${j}" tabindex="0" role="button" aria-label="节点 ${j+1}，${Math.round(n.t*FIT[mode].duration_ms)} 毫秒${j===0||j===knots.length-1?'，端点锁定':''}"><circle cx="${x(n.t)}" cy="${y(nodeValues[j])}" r="12" fill="transparent"/><circle cx="${x(n.t)}" cy="${y(nodeValues[j])}" r="${j===selectedNode?6:4.5}" fill="${j===0||j===knots.length-1?'#b6c3ae':j===selectedNode?'#216b55':'#fffefa'}" stroke="#216b55" stroke-width="1.7" pointer-events="none"/></g>`).join('');
+ $('graph').innerHTML=markup;updateEditor();$('maxError').textContent='当前高度 '+Math.round(H*(current[3]-current[1]))+'px';
+}
+
+function render(){
+ current=sample(mode,progress,from);const [l,t,r,b]=current,x=$('phone').clientWidth-W-21;
+ const style={left:(x+W*l)+'px',top:(BASE_Y+H*t)+'px',width:W*(r-l)+'px',height:H*(b-t)+'px'};
+ Object.assign($('popup').style,style,{opacity:alpha(),filter:motionBlur()>.02?`blur(${motionBlur()}px)`:'none',pointerEvents:alpha()>.6?'auto':'none'});
+ Object.assign($('bounds').style,style,{display:$('showBounds').checked?'block':'none'});
+ Object.assign($('anchorDot').style,{left:x+W*ANCHOR[0]-2+'px',top:BASE_Y-2+'px',display:$('showBounds').checked?'block':'none'});
+ const visible=alpha()>.01;$('menuContent').style.overflowY=progress===1&&mode==='open'?'auto':'hidden';$('popup').inert=!visible;$('popup').setAttribute('aria-hidden',String(!visible));$('themeTrigger').setAttribute('aria-expanded',String(visible));
+ $('timeline').value=Math.round(progress*1000);$('timeText').textContent=`${Math.round(progress*FIT[mode].duration_ms)} / ${FIT[mode].duration_ms} ms`;
+ $('openMode').setAttribute('aria-pressed',String(mode==='open'));$('closeMode').setAttribute('aria-pressed',String(mode==='close'));
+ $('stateText').textContent=playing?(mode==='open'?'展开中':'收起中'):(progress===1?(mode==='open'?'已展开':'已收起'):'逐帧预览');
+ $('playButton').textContent=playing?'Ⅱ 暂停':'▶ '+(progress>0&&progress<1?'继续播放':mode==='open'?'播放展开':'播放收起');
+ EDGES.forEach((key,i)=>$(key+'Value').textContent=current[i].toFixed(3));drawGraph();
+}
+function stop(){playing=false;cancelAnimationFrame(frameId);holdUntil=0;render();}
+function tick(now){
+ if(!playing)return;
+ if(holdUntil){if(now<holdUntil){frameId=requestAnimationFrame(tick);return;}holdUntil=0;mode=mode==='open'?'close':'open';progress=0;from=null;alphaFrom=null;blurFrom=null;lastTick=now;}
+ progress=Math.min(1,progress+Math.max(0,now-lastTick)*Number($('speed').value)/FIT[mode].duration_ms);lastTick=now;render();
+ if(progress>=1){if($('loop').checked){holdUntil=now+650;}else{playing=false;render();return;}}
+ frameId=requestAnimationFrame(tick);
+}
+function play(){if(playing){stop();return;}if(progress>=1){progress=0;from=null;alphaFrom=null;blurFrom=null;}playing=true;lastTick=performance.now();holdUntil=0;render();frameId=requestAnimationFrame(tick);}
+function chooseMode(next,run=false,retain=false){const before=[...current],beforeAlpha=alpha(),beforeBlur=motionBlur();stop();mode=next;progress=0;from=retain?before:null;alphaFrom=retain?beforeAlpha:null;blurFrom=retain?beforeBlur:null;render();if(run)play();}
+$('openMode').onclick=()=>chooseMode('open');$('closeMode').onclick=()=>chooseMode('close');
+$('playButton').onclick=play;$('resetButton').onclick=()=>{stop();progress=0;from=null;alphaFrom=null;blurFrom=null;play();};
+// Preserve the value before stop() re-renders the slider.
+$('timeline').oninput=e=>{const t=Number(e.target.value)/1000;stop();progress=t;from=null;alphaFrom=null;blurFrom=null;render();};
+$('showBounds').onchange=render;
+$('themeTrigger').onclick=()=>chooseMode(mode==='open'&&(progress>0||playing)?'close':'open',true,true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&alpha()>.01){chooseMode('close',true,true);$('themeTrigger').focus();}});
+$('phone').addEventListener('pointerdown',e=>{if(!e.target.closest('#popup,#themeTrigger')&&alpha()>.01)chooseMode('close',true,true);});
+document.querySelectorAll('[data-edge]').forEach(button=>button.onclick=()=>{edge=button.dataset.edge;document.querySelectorAll('[data-edge]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));drawGraph();});
+const actions=['搜索','排序方式','刷新当前栏','交换两栏','新建目录','新建文件','复制','移动','重命名','压缩','解压到当前目录','添加书签','查看属性','打开方式','分享','复制路径','显示隐藏文件','选择全部','终端打开','权限管理'];
+function buildMenu(){
+ H=Math.min(itemCount*52+12,380,$('phone').clientHeight-BASE_Y-86);
+ const short=itemCount===3,labels=short?['跟随系统','浅色','深色']:actions.slice(0,itemCount),themes=['system','light','dark'];
+ $('menuContent').innerHTML=labels.map((label,i)=>`<button class="menu-item ${short&&i===0?'selected':''}" data-item="${i}"><span>${label}</span><span class="check">${short?(i===0?'✓':''):'›'}</span></button>`).join('');
+ $('menuContent').scrollTop=0;const scrollable=itemCount*52+12>H;
+ $('menuContent').classList.toggle('scrollable',scrollable);$('scrollHint').hidden=!scrollable;
+ $('listSize').textContent=itemCount+' 项 / '+Math.round(H)+'px';$('triggerLabel').textContent=short?'主题':'更多操作';$('themeValue').textContent=short?'跟随系统':itemCount+' 项';$('popup').setAttribute('aria-label',short?'主题选择':'文件操作演示');
+ $('menuContent').querySelectorAll('[data-item]').forEach(button=>button.onclick=()=>{const i=Number(button.dataset.item);if(short){$('phone').classList.toggle('light',themes[i]==='light');$('themeValue').textContent=labels[i];$('menuContent').querySelectorAll('[data-item]').forEach((b,j)=>{b.classList.toggle('selected',i===j);b.querySelector('.check').textContent=i===j?'✓':'';});}chooseMode('close',true,true);$('themeTrigger').focus();$('toast').textContent=(short?'已选择':'演示选择：')+labels[i];$('toast').style.opacity=1;clearTimeout(toastId);toastId=setTimeout(()=>$('toast').style.opacity=0,1500);});
+ updateNote();
+}
+function updateNote(){const a=adaptation();$('motionNote').textContent=motionStyle==='original'?'对照：高度、下沉幅度都随菜单一起放大。长列表更容易出现拉扯感。':a===0?'短列表保留原来的展开与回弹。切换中、长列表，观察形变逐渐收敛。':'长列表减少拉伸和下沉，文字保持原尺寸；超出可用高度的项目在内部滚动。';}
+function resetScenario(){cancelAnimationFrame(frameId);playing=false;holdUntil=0;mode='open';progress=0;from=null;alphaFrom=null;blurFrom=null;buildMenu();render();play();}
+$('motionStyle').onchange=e=>{motionStyle=e.target.value;updateNote();chooseMode(mode);play();};
+document.querySelectorAll('[data-count]').forEach(button=>button.onclick=()=>{itemCount=Number(button.dataset.count);document.querySelectorAll('[data-count]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));resetScenario();});
+$('menuContent').onscroll=()=>{$('scrollHint').hidden=$('menuContent').scrollTop+$('menuContent').clientHeight>=$('menuContent').scrollHeight-3;};
+
+function updateEditor(force=false){
+ const nodes=nodesFor();selectedNode=Math.min(selectedNode,nodes.length-1);const n=nodes[selectedNode],i=EDGES.indexOf(edge),scale=i%2===0?W:H,locked=selectedNode===0||selectedNode===nodes.length-1;
+ const options=nodes.map((v,j)=>`<option value="${j}">${j+1}${j===0||j===nodes.length-1?' · 锁定':''}</option>`).join('');
+ if($('nodeSelect').innerHTML!==options)$('nodeSelect').innerHTML=options;$('nodeSelect').value=selectedNode;
+ if(force||document.activeElement!==$('nodeTime'))$('nodeTime').value=+(n.t*FIT[mode].duration_ms).toFixed(1);
+ if(force||document.activeElement!==$('nodeValue'))$('nodeValue').value=+((uneditedSample(mode,n.t)[i]+n.d)*scale).toFixed(2);
+ $('nodeTime').disabled=locked;$('nodeValue').disabled=locked;$('deleteNode').disabled=locked;$('undoNode').disabled=!(histories[configKey()]||[]).length;$('editStatus').textContent=editorMessage;
+}
+function editingStart(){playing=false;cancelAnimationFrame(frameId);holdUntil=0;from=null;alphaFrom=null;blurFrom=null;}
+function validGeometry(){
+ const leftOrigin=$('phone').clientWidth-W-21;
+ for(let j=0;j<=240;j++){const f=baseSample(mode,j/240);if(!f.every(Number.isFinite)||(f[2]-f[0])*W<48||(f[3]-f[1])*H<20||leftOrigin+f[0]*W<8||leftOrigin+f[2]*W>$('phone').clientWidth-8||BASE_Y+f[1]*H<40||BASE_Y+f[3]*H>$('phone').clientHeight-16)return false;}return true;
+}
+function changeNode(time,value,remember=false){
+ const key=configKey(),nodes=copyNodes(nodesFor()),j=selectedNode;if(j===0||j===nodes.length-1)return;
+ if(!Number.isFinite(time)||!Number.isFinite(value)){editorMessage='请输入有效数值';updateEditor();return;}
+ const t=Math.max(nodes[j-1].t+.01,Math.min(nodes[j+1].t-.01,time));
+ const scale=EDGES.indexOf(edge)%2===0?W:H;
+ nodes[j]={t,d:value/scale-uneditedSample(mode,t)[EDGES.indexOf(edge)]};const previous=edits[key];
+ if(remember)rememberEdit();edits[key]=nodes;
+ if(!validGeometry()){if(previous)edits[key]=previous;else delete edits[key];if(remember)histories[key].pop();editorMessage='已到可调边界：保持弹窗有尺寸并留在屏幕内。';}else{editorMessage='节点已更新，点「重播」查看完整效果';progress=t;saveEdits();}
+ render();updateEditor(true);
+}
+function addNode(t=progress){
+ editingStart();const nodes=copyNodes(nodesFor());if(nodes.length>=24){editorMessage='每条曲线最多 24 个节点';render();return;}
+ t=Math.max(.02,Math.min(.98,t));if(nodes.some(n=>Math.abs(n.t-t)<.02)){const gaps=nodes.slice(0,-1).map((n,i)=>({t:(n.t+nodes[i+1].t)/2,gap:nodes[i+1].t-n.t})).sort((a,b)=>b.gap-a.gap);t=gaps[0].t;}
+ const d=nodeOffset(edits[configKey()],t);rememberEdit();nodes.push({t,d});nodes.sort((a,b)=>a.t-b.t);const previous=edits[configKey()];edits[configKey()]=nodes;if(!validGeometry()){if(previous)edits[configKey()]=previous;else delete edits[configKey()];histories[configKey()].pop();editorMessage='此处加点会越过屏幕边界，请换一个位置';render();return;}selectedNode=nodes.findIndex(n=>n.t===t);progress=t;editorMessage='已添加节点，拖动或输入位置';saveEdits();render();
+}
+$('nodeSelect').onchange=e=>{selectedNode=+e.target.value;editingStart();progress=nodesFor()[selectedNode].t;render();};
+$('nodeTime').onchange=e=>{editingStart();changeNode(+e.target.value/FIT[mode].duration_ms,+$('nodeValue').value,true);};
+$('nodeValue').onchange=e=>{editingStart();changeNode(nodesFor()[selectedNode].t,+e.target.value,true);};
+$('addNode').onclick=()=>addNode();
+$('deleteNode').onclick=()=>{editingStart();const nodes=copyNodes(nodesFor());if(selectedNode===0||selectedNode===nodes.length-1)return;rememberEdit();const previous=edits[configKey()];nodes.splice(selectedNode,1);edits[configKey()]=nodes;if(!validGeometry()){if(previous)edits[configKey()]=previous;else delete edits[configKey()];histories[configKey()].pop();editorMessage='删除此节点会越过屏幕边界';render();return;}selectedNode=Math.min(selectedNode,nodes.length-2);editorMessage='已删除节点';saveEdits();render();};
+$('undoNode').onclick=()=>{const history=histories[configKey()];if(!history?.length)return;editingStart();edits[configKey()]=history.pop();editorMessage='已撤销上次修改';saveEdits();render();};
+$('resetNodes').onclick=()=>{editingStart();rememberEdit();delete edits[configKey()];selectedNode=1;editorMessage='当前曲线已恢复，可撤销';saveEdits();render();};
+$('exportNodes').onclick=()=>{
+ const data={version:1,model:'analytic-baseline-plus-pchip-offset',note:'Keys: motionStyle|itemCount|direction|edge. t: normalized time, d: normalized position offset. Zero endpoint slopes.',dimensions:{width:W,heights:{3:168,6:324,20:380}},durations:{open:360,close:212},fit:FIT,edits,active:{motionStyle,itemCount,mode,edge},exportedAt:new Date().toISOString()};
+ const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download='popup-curve-nodes-'+new Date().toISOString().replace(/[:.]/g,'-')+'.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);editorMessage='已导出节点 JSON';updateEditor();
+};
+let dragging=false;
+function pointOnGraph(event){const p=new DOMPoint(event.clientX,event.clientY).matrixTransform($('graph').getScreenCTM().inverse());return {t:Math.max(0,Math.min(1,(p.x-40)/448)),value:graphMap.min+(156-p.y)/132*(graphMap.max-graphMap.min)};}
+function scrubGraph(event){const point=pointOnGraph(event);editingStart();progress=point.t;render();}
+$('graph').onpointerdown=e=>{const handle=e.target.closest('[data-node]');editingStart();$('graph').setPointerCapture(e.pointerId);if(handle){selectedNode=+handle.dataset.node;progress=nodesFor()[selectedNode].t;const locked=selectedNode===0||selectedNode===nodesFor().length-1;if(!locked){rememberEdit();graphDomain={min:graphMap.min,max:graphMap.max};nodeDrag={index:selectedNode};}editorMessage=locked?'起终点已锁定，保证展开与收起准确归位':'拖动节点，预览会跟随当前时间';render();}else{dragging=true;scrubGraph(e);}};
+$('graph').onpointermove=e=>{if(nodeDrag){const point=pointOnGraph(e);changeNode(point.t,point.value);}else if(dragging)scrubGraph(e);};
+function finishDrag(){nodeDrag=null;dragging=false;graphDomain=null;render();}
+$('graph').onpointerup=finishDrag;$('graph').onpointercancel=finishDrag;
+$('graph').ondblclick=e=>{if(!e.target.closest('[data-node]'))addNode(pointOnGraph(e).t);};
+$('graph').onkeydown=e=>{const handle=e.target.closest('[data-node]');if(!handle)return;selectedNode=+handle.dataset.node;const node=nodesFor()[selectedNode];if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();editingStart();const scale=EDGES.indexOf(edge)%2===0?W:H,value=(uneditedSample(mode,node.t)[EDGES.indexOf(edge)]+node.d)*scale,step=e.shiftKey?5:1;changeNode(node.t+(e.key==='ArrowLeft'?-step:e.key==='ArrowRight'?step:0)/FIT[mode].duration_ms,value+(e.key==='ArrowUp'?step:e.key==='ArrowDown'?-step:0),true);$('graph').querySelector(`[data-node="${selectedNode}"]`)?.focus();}};
+
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&playing)stop();});window.addEventListener('resize',render);buildMenu();render();
+</script>
+</body>
+</html>
